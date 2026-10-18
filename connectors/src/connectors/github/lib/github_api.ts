@@ -62,6 +62,7 @@ export type GithubRepo = {
   updatedAt: Date | null;
   description?: string | null;
   owner: GithubOrg;
+  topics: string[];
 };
 
 export type GithubUser = {
@@ -139,6 +140,7 @@ export async function getReposPage(
           id: r.owner.id,
           login: r.owner.login,
         },
+        topics: r.topics ?? [],
       }))
     );
   } catch (e) {
@@ -172,6 +174,7 @@ export async function getRepo(
         id: r.owner.id,
         login: r.owner.login,
       },
+      topics: r.topics ?? [],
     });
   } catch (err) {
     if (isGithubRequestErrorNotFound(err)) {
